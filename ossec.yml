@@ -1,0 +1,26 @@
+---
+- hosts: '{{ hosts  }}'
+  remote_user: root
+  vars:
+      path_file: /var/ossec/etc/ossec.conf
+      key_av: "ODQgbm1zLXZwbHMtbmV0IDE3Mi4xNi44NC4xMCAwNmYzYWJiMjJlMGRmOGI5ZWIyNTUzZTljMzE1M2VhODBiZDZlNTk0ZjhlODBiYjY2ZjI3ZTlmN2QyZWNhZWRl"
+  tasks:
+      - name: Install package ossec-agent
+        yum: state=latest name=ossec-hids-agent update_cache=yes
+
+      - name: Configuration server ip
+        shell: "sed -i 's/10.66.6.211/172.16.84.35/g' /var/ossec/etc/ossec.conf"
+
+      - name: Activate KEY
+        shell: "echo -e I\n'{{ key_av }}'\ny\n\nQ\n | /var/ossec/bin/manage_agent"
+
+      - name: Cleanup config agent.conf
+        shell: ":> /var/ossec/etc/shared/agent.conf"
+
+      - name: reload service ossec-hids [CentOS 7 and Fedora ]
+        systemd: state=reloaded name=ossec-hids
+        when: ansible_distribution == "CentOS" and ansible_distribution_major_version =='7' or  ansible_distribution == "Fedora" and ansible_distribution_major_version =='24'
+
+      - name: reload service ossec-hids[CentOS 6]
+        service: state=reloaded name=ossec-hids
+        when: ansible_distribution == "CentOS" and ansible_distribution_major_version =='6'
