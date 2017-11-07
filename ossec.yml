@@ -9,7 +9,7 @@
         yum: state=latest name=ossec-hids-agent update_cache=yes
 
       - name: Configuration server ip
-        shell: "sed -i 's/10.66.6.211/172.16.84.35/g' /var/ossec/etc/ossec.conf"
+        shell: "sed -i 's/'{{ spacewalk_ip_address }}'/172.16.84.35/g' /var/ossec/etc/ossec.conf"
 
       - name: Activate KEY
         shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agent"
