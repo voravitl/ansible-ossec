@@ -12,7 +12,7 @@
         shell: "sed -i 's/10.66.6.211/172.16.84.35/g' /var/ossec/etc/ossec.conf"
 
       - name: Activate KEY
-        shell: "echo -e I\n'{{ key_av }}'\ny\n\nQ\n | /var/ossec/bin/manage_agent"
+        shell: "echo -e "I\n'{{ key_av }}'\ny\n\nQ\n" | /var/ossec/bin/manage_agent"
 
       - name: Cleanup config agent.conf
         shell: ":> /var/ossec/etc/shared/agent.conf"
