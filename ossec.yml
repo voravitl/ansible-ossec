@@ -3,7 +3,7 @@
   remote_user: root
   vars:
       path_file: /var/ossec/etc/ossec.conf
-      key_av: "ODQgbm1zLXZwbHMtbmV0IDE3Mi4xNi44NC4xMCAwNmYzYWJiMjJlMGRmOGI5ZWIyNTUzZTljMzE1M2VhODBiZDZlNTk0ZjhlODBiYjY2ZjI3ZTlmN2QyZWNhZWRl"
+      key_av: "{{key_av}}"
   tasks:
       - name: Install package ossec-agent
         yum: state=latest name=ossec-hids-agent update_cache=yes
