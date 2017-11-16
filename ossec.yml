@@ -43,8 +43,12 @@
 
   - name: reload service ossec-hids
     service: state=reloaded name=ossec-hids
-    when: ansible_distribution == "CentOS" and ansible_distribution_major_version =='6' or ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='14'
-
+    when: ansible_distribution == "CentOS" and ansible_distribution_major_version =='6' 
+    
   - name: reload service ossec-hids
     systemd: state=reloaded name=ossec.service
-    when: ansible_distribution == "Ubuntu"
+    when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='16'
+    
+  - name: reload service ossec-hids
+    service: state=reloaded name=ossec
+    when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='14'
