@@ -35,7 +35,7 @@
     
   - name: Cleanup config agent.conf
     shell: ":> /var/ossec/etc/shared/agent.conf"
-    when: ansible_distribution == "CentOS"
+
 
   - name: reload service ossec-hids
     systemd: state=reloaded name=ossec-hids
