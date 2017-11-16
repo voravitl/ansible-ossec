@@ -20,7 +20,7 @@
         shell: {{ item }}
         with_items:
           - apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
-          - echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main' >> /etc/apt/sources.list
+          - echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu xenial main' >> /etc/apt/sources.list
          when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='16'
       
       - name: Install Package 
