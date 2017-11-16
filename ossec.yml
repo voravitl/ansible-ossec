@@ -27,9 +27,15 @@
 
   - name: Activate KEY
     shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agent"
-
+    when: ansible_distribution == "CentOS"
+    
+  - name: Activate KEY
+    shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agents"
+    when: ansible_distribution == "Ubuntu"
+    
   - name: Cleanup config agent.conf
     shell: ":> /var/ossec/etc/shared/agent.conf"
+    when: ansible_distribution == "CentOS"
 
   - name: reload service ossec-hids
     systemd: state=reloaded name=ossec-hids
