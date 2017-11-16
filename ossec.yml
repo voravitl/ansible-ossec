@@ -5,9 +5,28 @@
       path_file: /var/ossec/etc/ossec.conf
       key_av: "{{ key_av }}"
   tasks:
-      - name: Install package ossec-agent
+      - name: Install package ossec-agent (CentOS)
         yum: state=latest name=ossec-hids-agent update_cache=yes
-
+        when ansible_distribution == "CentOS"
+        
+      - name: Install repo ossec (Ubuntu 14)
+        shell: {{ item }}
+        with_items:
+          - apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
+          - echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main' >> /etc/apt/sources.list
+         when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='14'
+         
+      - name: Install repo ossec (Ubuntu 16)
+        shell: {{ item }}
+        with_items:
+          - apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
+          - echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main' >> /etc/apt/sources.list
+         when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='16'
+      
+      - name: Install Package 
+        apt: name="ossec-hids-agent" state=present
+        when: ansible_distribution == "Ubuntu"
+        
       - name: Configuration server ip
         shell: "sed -i 's#<server-ip>.*#<server-ip>172.16.84.35</server-ip>#' /var/ossec/etc/ossec.conf"
 
