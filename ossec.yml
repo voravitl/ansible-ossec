@@ -11,11 +11,11 @@
     when: ansible_distribution == "CentOS"
 
   - name: Install repo ossec (Ubuntu 14)
-    shell: "apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key ; echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main' >> /etc/apt/sources.list.d/ossec.list"
+    shell: "apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key ; echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main' > /etc/apt/sources.list.d/ossec.list"
     when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='14'
 
   - name: Install repo ossec (Ubuntu 16)
-    shell: "apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key ; echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu xenial main' >> /etc/apt/sources.list.d/ossec.list"
+    shell: "apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key ; echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu xenial main' > /etc/apt/sources.list.d/ossec.list"
     when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='16'
 
   - name: Install Package
