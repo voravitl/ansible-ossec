@@ -42,17 +42,17 @@
 
 
   - name: reload systemd ossec-hids
-    systemd: state=reloaded name=ossec-hids
+    systemd: state=reloaded name=ossec-hids enabled=yes
     when: ansible_distribution == "CentOS" and ansible_distribution_major_version =='7' or  ansible_distribution == "Fedora" and ansible_distribution_major_version =='24'
 
   - name: reload service ossec-hids
-    service: state=restarted name=ossec-hids
+    service: state=restarted name=ossec-hids enabled=yes
     when: ansible_distribution == "CentOS" and ansible_distribution_major_version =='6' 
     
   - name: reload systemd ossec-hids
-    systemd: state=restarted name=ossec.service
+    systemd: state=restarted name=ossec.service enabled=yes
     when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='16'
     
   - name: reload service ossec-hids
-    service: state=restarted name=ossec
+    service: state=restarted name=ossec enabled=yes
     when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='14'
