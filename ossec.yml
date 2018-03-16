@@ -58,3 +58,5 @@
   - name: reload service ossec-hids
     service: state=restarted name=ossec enabled=yes
     when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version =='14'
+  - name: Unsubscribe ossec Chanal 
+    shell: spacewalk-channel -r -c ossec-epel7-x86_64 --user=admin --password='SrK/hQ9(SN}x,{dz'
