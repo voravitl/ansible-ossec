@@ -26,9 +26,14 @@
     apt: name="ossec-hids-agent" state=present update_cache=yes
     when: ansible_distribution == "Ubuntu"
 
-  - name: Configuration server ip
+  - name: Configuration server  Insternal ip
     shell: "sed -i 's#<server-ip>.*#<server-ip>172.16.84.35</server-ip>#' /var/ossec/etc/ossec.conf"
-
+    when: internal_ip_allow == "YES"
+  
+  - name: Configuration server Public  ip
+    shell: "sed -i 's#<server-ip>.*#<server-ip>172.16.84.35</server-ip>#' /var/ossec/etc/ossec.conf"
+    when: internal_ip_allow == "NO"
+    
   - name: Activate KEY
     shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agent"
     when: ansible_distribution == "CentOS"
