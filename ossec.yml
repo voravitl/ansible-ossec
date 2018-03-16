@@ -6,10 +6,6 @@
     key_av: "{{ key_av }}"
     check_ip: "{{ internal_ip_allow }}"
     
-  tasks:
-  - set_fact
-    internal_ip_allow: "{{ internal_ip_allow }}"
-    
   - name: Install package ossec-agent (CentOS)
     yum: state=latest name=ossec-hids-agent update_cache=yes
     when: ansible_distribution == "CentOS"
