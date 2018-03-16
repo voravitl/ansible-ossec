@@ -28,7 +28,7 @@
     when: ansible_distribution == "Ubuntu"
 
   - name: Configuration server IP
-    shell: "sed -i 's#<server-ip>.*#<server-ip>'{{IP}}'</server-ip>#' /var/ossec/etc/ossec.conf"
+    shell: "sed -i 's#<server-ip>.*#<server-ip>'{{ip}}'</server-ip>#' /var/ossec/etc/ossec.conf"
     
   - name: Activate KEY
     shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agent"
