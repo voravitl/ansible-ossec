@@ -4,6 +4,7 @@
   vars:
     path_file: /var/ossec/etc/ossec.conf
     key_av: "{{ key_av }}"
+    internal_ip_allow: "{{ internal_ip_allow }}"
   tasks:
 
   - name: Install package ossec-agent (CentOS)
