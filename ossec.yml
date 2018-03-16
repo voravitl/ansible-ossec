@@ -4,7 +4,6 @@
   vars:
     path_file: /var/ossec/etc/ossec.conf
     key_av: "{{ key_av }}"
-    check_ip: "{{ internal_ip_allow }}"
   
   tasks:
   
@@ -30,11 +29,11 @@
 
   - name: Configuration server  Insternal ip
     shell: "sed -i 's#<server-ip>.*#<server-ip>172.16.84.35</server-ip>#' /var/ossec/etc/ossec.conf"
-    when: check_ip == "YES"
+    when: "{{ internal_ip_allow }}" | match('YES')"
   
   - name: Configuration server Public  ip
     shell: "sed -i 's#<server-ip>.*#<server-ip>74.222.128.35</server-ip>#' /var/ossec/etc/ossec.conf"
-    when: check_ip  == 'NO'
+    when: "{{ internal_ip_allow }}" | match('NO')"
     
   - name: Activate KEY
     shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agent"
