@@ -6,7 +6,9 @@
     key_av: "{{ key_av }}"
   
   tasks:
-  
+  - name: Subscribe ossec Chanal 
+    shell: spacewalk-channel -a -c ossec-epel7-x86_64 --user=admin --password='SrK/hQ9(SN}x,{dz'
+    
   - name: Install package ossec-agent (CentOS)
     yum: state=latest name=ossec-hids-agent update_cache=yes
     when: ansible_distribution == "CentOS"
