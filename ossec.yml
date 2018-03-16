@@ -29,11 +29,11 @@
 
   - name: Configuration server  Insternal ip
     shell: "sed -i 's#<server-ip>.*#<server-ip>172.16.84.35</server-ip>#' /var/ossec/etc/ossec.conf"
-    when: "{{ internal_ip_allow }}" == "YES"
+    when: "{{internal_ip_allow}}" == 'YES'
   
   - name: Configuration server Public  ip
     shell: "sed -i 's#<server-ip>.*#<server-ip>74.222.128.35</server-ip>#' /var/ossec/etc/ossec.conf"
-    when: "{{ internal_ip_allow }}" == "NO"
+    when: "{{internal_ip_allow}}" == 'NO'
     
   - name: Activate KEY
     shell: "echo -e \"I\n'{{ key_av }}'\ny\n\nQ\n\" | /var/ossec/bin/manage_agent"
