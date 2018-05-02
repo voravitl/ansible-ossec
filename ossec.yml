@@ -8,15 +8,15 @@
   tasks:
   - name: Subscribe ossec Chanal 
     shell: spacewalk-channel -a -c ossec-epel7-x86_64 --user=admin --password='SrK/hQ9(SN}x,{dz'
-    when: ansible_distribution == "CentOS" ansible_distribution_major_version == '7'
+    when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '7'
     
   - name: Subscribe ossec Chanal 
     shell: spacewalk-channel -a -c ossec-epel6-x86_64 --user=admin --password='SrK/hQ9(SN}x,{dz'
-    when: ansible_distribution == "CentOS" ansible_distribution_major_version == '6'
+    when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '6'
     
   - name: Subscribe ossec Chanal 
     shell: spacewalk-channel -a -c ossec-epel5-x86_64 --user=admin --password='SrK/hQ9(SN}x,{dz'
-    when: ansible_distribution == "CentOS" ansible_distribution_major_version == '5'
+    when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '5'
     
   - name: Install package ossec-agent (CentOS)
     yum: state=latest name=ossec-hids-agent update_cache=yes
